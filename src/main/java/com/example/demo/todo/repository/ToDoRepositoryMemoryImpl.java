@@ -1,6 +1,8 @@
 package com.example.demo.todo.repository;
 
 import com.example.demo.todo.entity.ToDo;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,6 +12,7 @@ import java.util.function.ToDoubleFunction;
 
 // 이 클라스가 하는 일 : 할 일 데이터를 메모리에 CRUD하는 역할
 // 아깐 추상적이고 지금은 메모리라고 구체적으로 정했음
+@Repository
 public class ToDoRepositoryMemoryImpl implements TodoRepository{
 
 //  메모리 저장소
@@ -22,6 +25,11 @@ public class ToDoRepositoryMemoryImpl implements TodoRepository{
     // static을 붙이니|까 한개만 생성됨
     // final = 교체불가로 기입
 
+    static {
+        toDoMap.put(1L, new ToDo(1L, "김철수", "저녁밥 만들기", false));
+        toDoMap.put(2L, new ToDo(2L, "박영희", "산책가기", false));
+        toDoMap.put(3L, new ToDo(3L, "김철수", "노래연습하기", true));
+    }
 
     @Override
     public boolean save(ToDo todo) {

@@ -1,11 +1,14 @@
 package com.example.demo.todo.repository;
 
 import com.example.demo.todo.entity.ToDo;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 // 아직 저장소가 선택된게 전혀 없음, 일단 개발은 해야되니까 인터페이스부터 만듬
 // 역할 : 할 일 데이터를 CRUD한다(CRUD = 생성, 조회, 수정, 삭제)
+
+
 public interface TodoRepository {
     // 추상적으로
     // 할 일 생성 기능(이름부터 짓기, 회사에선 다이어그램 내려옴 ㅎㅎ)
