@@ -30,17 +30,47 @@ public class TodoService {
         return new FindAllDTO(repository.findAll());
     }
 
-    public FindAllDTO createServ(ToDo newTodo) {
+    public FindAllDTO createServ( final ToDo newTodo) {  // 내부에서new ToDo() 못하게 final 선언하기
 
-        repository.save(newTodo);
-        log.info("새로운 할일 [Id : {}]이 저장되었습니다.", newTodo.getId());
-        return findAllServ(); // 삽입하고 결과리소스를 다시 반환하기, 위에 있는 findAllServ 활용하기
+        if (newTodo == null){
+            log.warn("newTodo cannot be null!");
+            throw new RuntimeException("newTodo cannot be null!");
+        }
+
+        boolean flag = repository.save(newTodo);
+        if (flag) log.info("새로운 할일 [Id : {}]이 저장되었습니다.", newTodo.getId());
+        return flag ? findAllServ() : null; // 삽입하고 결과리소스를 다시 반환하기, 위에 있는 findAllServ 활용하기
 
     }
+
+    /*
+    // Q! : 할 일 개별 조회 요청
+    public FindAllDTO findOneServ() {
+
+        return FindAllDTO(repository.findOne());
+    }
+    */
+
+    // Q! : 할 일 삭제 요청
+    public FindAllDTO deleteServ(long id) {
+
+        boolean flag = repository.remove(id);
+
+        // 삭제 실패한 경우
+        if (!flag) {
+            log.warn("delete fail!! not found id [{}]", id);
+            throw new RuntimeException("delete fail!"); // >> throw 만나면 원래 터짐,
+        }
+        return findAllServ();
+    }
+
 }
+
+
+
         //List<ToDo> toDoList = repository.findAll();
-    // 투두 리스트를 투두 디티오 리시트로 만들어주는것 생성
-        //FindAllDTO findAllDTO = new FindAllDTO(toDoList);
+        // List<ToDo>  List<Dto>로 만드는 코드 생성
+        // FindAllDTO findAllDTO = new FindAllDTO(toDoList);
 
         /*
         FindAllDTO findAllDTO = new FindAllDTO(toDoList);
