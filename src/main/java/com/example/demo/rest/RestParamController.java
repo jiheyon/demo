@@ -2,10 +2,7 @@ package com.example.demo.rest;
 
 import lombok.*;
 import org.springframework.web.SpringServletContainerInitializer;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -51,6 +48,12 @@ public class RestParamController {
 
         );
     }
+    @GetMapping("/user4/{userNum}")  // ("/user4/{userNum}/{Num2}") 여러값 입력가능
+    public String user4(@PathVariable("userNum") int Num){ //그냥두면 ?를 읽으려고 함
+        //@PathVariable 이거 써야 / 뒤를 읽어줌
+        return String.format("회원번호는 %d번입니다.", Num);
+    }
+
 
     @Setter // 필수, 없으면 DTO작동안함
     @Getter
