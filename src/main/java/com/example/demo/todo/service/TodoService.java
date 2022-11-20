@@ -26,10 +26,18 @@ public class TodoService {
         2. 할 일 목록의 카운트를 세서 따로 추가해서 전달한다.
      */
 
-
     public FindAllDTO findAllServ() {
         return new FindAllDTO(repository.findAll());
+    }
 
+    public FindAllDTO createServ(ToDo newTodo) {
+
+        repository.save(newTodo);
+        log.info("새로운 할일 [Id : {}]이 저장되었습니다.", newTodo.getId());
+        return findAllServ(); // 삽입하고 결과리소스를 다시 반환하기, 위에 있는 findAllServ 활용하기
+
+    }
+}
         //List<ToDo> toDoList = repository.findAll();
     // 투두 리스트를 투두 디티오 리시트로 만들어주는것 생성
         //FindAllDTO findAllDTO = new FindAllDTO(toDoList);
@@ -40,6 +48,3 @@ public class TodoService {
         findAllDTO.convertDtoList(toDoList);
         */
         //return findAllDTO;
-    }
-
-}

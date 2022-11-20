@@ -7,9 +7,7 @@
             import lombok.RequiredArgsConstructor;
             import lombok.extern.slf4j.Slf4j;
             import org.springframework.beans.factory.annotation.Autowired;
-            import org.springframework.web.bind.annotation.GetMapping;
-            import org.springframework.web.bind.annotation.RequestMapping;
-            import org.springframework.web.bind.annotation.RestController;
+            import org.springframework.web.bind.annotation.*;
 
             import java.util.List;
 
@@ -26,16 +24,26 @@ public class TodoApiController {
                   this.repository = repository;
               }
               */
-    // 할 일 목록 전체조회 요청
-    // 할 일 목록 전체조회 요청
+
+       // 할 일 목록 전체조회 요청
     @GetMapping
     public FindAllDTO todos() {
         log.info("/api/todos GET request!");
-
-        FindAllDTO findAllDTO = service.findAllServ();  // 정제된 내역만 주기
-
-        return findAllDTO;
+        return service.findAllServ();
     }
+
+    // 할 일 목록 등록 요청 >> 클라이언트가 정보를 알려줘야함
+    @PostMapping   //새롭게 등록된 할일이 포함된 리스트를 전달해줄거임
+    public FindAllDTO create(@RequestBody ToDo newTodo) { // 클라이언트가 웹이 아닐수도 있으니까 json으로 변환해야됨
+
+        newTodo.setUserId("noname"); // 수동 주입
+        log.info("/api/todos POST request! - {}", newTodo);
+
+        FindAllDTO dto = service.createServ(newTodo);
+
+       return dto;
+    }
+
 }
 
 
