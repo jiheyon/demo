@@ -1,21 +1,21 @@
 package com.example.demo.todo.service;
 
-// 역할 : 컨트롤러와 저장소 사이즤 잡일 처리 역할
 
-import com.example.demo.todo.dto.FindAllDTO;
-import com.example.demo.todo.dto.TodoDto;
-import com.example.demo.todo.entity.ToDo;
-import com.example.demo.todo.repository.TodoRepository;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Service;
+        import com.example.demo.todo.dto.FindAllDTO;
+        import com.example.demo.todo.dto.TodoDto;
+        import com.example.demo.todo.entity.ToDo;
+        import com.example.demo.todo.repository.TodoRepository;
+        import lombok.RequiredArgsConstructor;
+        import lombok.extern.slf4j.Slf4j;
+        import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+        import java.util.ArrayList;
+        import java.util.List;
 
-@Service  // 컨트롤러와 레파지토리 사이에 있음. 서비스>레파짓토리 의존
+// 역할: 컨트롤러와 저장소 사이의 잡일 처리 역할
+@Service
 @Slf4j
-@RequiredArgsConstructor // 생성자 만들기
+@RequiredArgsConstructor
 public class TodoService {
 
     private final TodoRepository repository;
@@ -26,21 +26,20 @@ public class TodoService {
         2. 할 일 목록의 카운트를 세서 따로 추가해서 전달한다.
      */
 
-    public void findAllServ(){
-        List<ToDo> toDoList = repository.findAll();   // 랴ㅜㅇ미ㅣㅇ새fh qusghksgotj wnjdigka
 
-        FindAllDTO findAllDTO = new FindAllDTO();
-        findAllDTO.setCount(toDoList.size()); //목록 리스트 사이즈 담아서 주기
-        List<TodoDto> dtos = new ArrayList<>();
+    public FindAllDTO findAllServ() {
+        return new FindAllDTO(repository.findAll());
 
-        for (ToDo toDo : toDoList) {
-            TodoDto dto = new TodoDto();
-            dto.setId(toDo.getId());
-            dto.setTitle(toDo.getTitle());
-            dto.setDone(toDo.isDone());
+        //List<ToDo> toDoList = repository.findAll();
+    // 투두 리스트를 투두 디티오 리시트로 만들어주는것 생성
+        //FindAllDTO findAllDTO = new FindAllDTO(toDoList);
 
-            dtos.add(dto);
-        }
-        findAllDTO.setTodos(dtos);
+        /*
+        FindAllDTO findAllDTO = new FindAllDTO(toDoList);
+        findAllDTO.setCount(toDoList.size());
+        findAllDTO.convertDtoList(toDoList);
+        */
+        //return findAllDTO;
     }
+
 }
