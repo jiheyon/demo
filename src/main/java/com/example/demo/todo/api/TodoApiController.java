@@ -66,12 +66,13 @@ public class TodoApiController {
 
     // 컨트롤러랑 서비스만 구현하면 됨, Repository는 이미 검증 끝났음
 
-    // Q! : 할 일 개별 조회 요청
+
+
+    // ★ Q! : 할 일 개별 조회 요청(숙제)
     // URL : /api/todos/3 => 3번 할 일만 조회해서 클라이언트에게 리턴 (GET)
 
     // Q! : 할 일 삭제 요청
     // URL : /api/todos/3 => 3번 할 일을 삭제 후 이후 갱신된 할일 목록 리턴
-
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable long id) {  // {} 값 읽는거 @PathVariable
 
@@ -87,6 +88,7 @@ public class TodoApiController {
     }
 
 }
+
 
 
 
