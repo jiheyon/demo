@@ -20,7 +20,7 @@ public class TodoApiController {
 
     private final TodoService service;
     /*   @RequiredArgsConstructor >> 생성자 안만들어도 자동주입임.
-              @Autowired   // 셍상지 주입
+              @Autowired   // 셍상지  주입
               public TodoApiController(TodoRepository repository) {
                   this.repository = repository;
               }
